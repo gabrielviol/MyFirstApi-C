@@ -30,3 +30,4 @@ C:\git\MyFirstApi\obj\Debug\net8.0\refint\MyFirstApi.dll
 C:\git\MyFirstApi\obj\Debug\net8.0\MyFirstApi.pdb
 C:\git\MyFirstApi\obj\Debug\net8.0\MyFirstApi.genruntimeconfig.cache
 C:\git\MyFirstApi\obj\Debug\net8.0\ref\MyFirstApi.dll
+C:\git\MyFirstApi\obj\Debug\net8.0\MyFirstApi.sourcelink.json
