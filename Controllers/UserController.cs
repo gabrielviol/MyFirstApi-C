@@ -1,15 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MyFirstApi.Communication.Requests;
+using MyFirstApi.Communication.Responses;
 
 namespace MyFirstApi.Controllers;
-[Route("api/[controller]")]
-[ApiController]
-public class UserController : ControllerBase
+public class UserController : MyFirstApiBaseController
 {
     [HttpGet]
-    [Route("{id}/person/{nickname}")]
+    [Route("{id}")]
     [ProducesResponseType(typeof(User), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
-    public IActionResult Get(int id, string nickname)
+    public IActionResult GetById([FromRoute] int id)
     {
         var response = new User
         {
@@ -19,5 +19,59 @@ public class UserController : ControllerBase
             Age = 7,
         };
         return Ok(response);
+    }
+
+    [HttpPost]
+    [ProducesResponseType(typeof(ResponseRegisteredUserJson), StatusCodes.Status201Created)]
+    public IActionResult Create([FromBody] RequestRegisterUserJson request) 
+    {
+        var response = new ResponseRegisteredUserJson
+        {
+            Id = 1,
+            Name = request.Name
+        };
+
+        return Created(string.Empty, response);
+    }
+
+    [HttpPut]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    public IActionResult Update([FromBody] RequestUpdateUserProfileJson request)
+    {
+        return NoContent();
+    }
+
+    [HttpDelete]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    public IActionResult Delete()
+    {
+        return NoContent();
+    }
+
+    [HttpGet]
+    [ProducesResponseType(typeof(List<User>), StatusCodes.Status200OK)]
+    public IActionResult GetAll() 
+    {
+        var response = new List<User>()
+        {
+            new User { Id = 1, Age = 24, Name = "Rebecca" },
+            new User { Id = 2, Age = 26, Name = "Gabriel" }
+        };
+
+        return Ok(response);
+    }
+
+    [HttpPut("change-password")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    public IActionResult ChangePassword([FromBody] RequestChangePasswordJson request)
+    {
+        return NoContent();
+    }
+
+    [HttpPut("change-password2")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    public IActionResult ChangePassword2([FromBody] RequestChangePasswordJson request)
+    {
+        return NoContent();
     }
 }
